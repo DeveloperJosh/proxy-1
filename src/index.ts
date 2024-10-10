@@ -6,7 +6,7 @@ const PORT = 8080;
 
 const server = createServer((clientReq, clientRes) => {
   // Parse the request URL
-  const url = new URL(clientReq.url || '', `http://${clientReq.headers.host}`);
+  const url = new URL(clientReq.url || '', `https://${clientReq.headers.host}`);
 
   const options = {
     hostname: url.hostname,
@@ -36,7 +36,7 @@ const server = createServer((clientReq, clientRes) => {
 
 // Handle HTTPS CONNECT method
 server.on('connect', (req, clientSocket, head) => {
-  const { port, hostname } = new URL(`http://${req.url}`);
+  const { port, hostname } = new URL(`https://${req.url}`);
 
   // Establish a connection to the target server
   const serverSocket = connect(Number(port) || 443, hostname, () => {
